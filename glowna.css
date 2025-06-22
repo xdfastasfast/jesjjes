@@ -1,0 +1,294 @@
+/* Resetowanie domyślnych stylów */
+body, h1, h2, p, ul, li {
+    margin: 0;
+    padding: 0;
+}
+
+/* Ogólne style dla strony */
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.5;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: #fff0f5;
+
+/* Kontener */
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Header */
+header {
+    background-color: #f8bbd0;
+    color: #6a1b9a;
+    padding: 20px;
+    text-align: center;
+    font-family: 'Brush Script Std', cursive;
+    text-shadow: 1px 1px 3px #fce4ec;
+    border-bottom: 4px solid #ec407a;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 36px;
+}
+
+/* Pasek nawigacyjny */
+.nav-container {
+    background-color: #f48fb1;
+    color: white;
+    text-align: center;
+    height: 40px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    height: 100%;
+}
+
+nav li {
+    display: flex;
+    align-items: center;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 10px;
+    transition: background-color 0.3s;
+}
+
+nav a:hover {
+    background-color: #f06292;
+    color: white;
+}
+
+/* Main */
+main {
+    flex: 1;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-evenly;
+    flex-direction: row;
+    background-color: #ffe4ec;
+    padding: 20px;
+}
+
+main a {
+    text-decoration: none;
+    color: #880e4f;
+}
+
+/* Post */
+.post {
+    background-color: #fce4ec;
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: 12px;
+    width: 400px;
+    height: 400px;
+    box-shadow: 0 4px 15px rgba(255, 105, 180, 0.3);
+    border: 2px solid #f48fb1;
+}
+
+.post h2 {
+    font-size: 24px;
+    color: #880e4f;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.post h5 {
+    font-size: 14px;
+    color: #ad1457;
+    margin-bottom: 15px;
+}
+
+.post p {
+    font-size: 16px;
+    color: #6a1b9a;
+    height: 280px;
+    padding-top: 10px;
+    word-wrap: break-word;
+}
+
+/* Komentarze */
+.postincomment form {
+    margin-left: 300px;
+    margin-top: 20px;
+    padding: 2px;
+}
+
+.postincomment input {
+    background-color: #ad1457;
+    border: none;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 6px;
+}
+
+.postincomment input:hover {
+    background-color: #880e4f;
+}
+
+/* Przycisk poprzedni/następny */
+.previous, .next {
+    position: fixed;
+    bottom: 25%;
+    height: 350px;
+    width: 100px;
+    line-height: 350px;
+    padding: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    background: linear-gradient(135deg, #f48fb1 0%, #ce93d8 100%);
+    box-shadow: 0 4px 15px rgba(244, 143, 177, 0.5);
+}
+
+.previous {
+    left: 10px;
+}
+
+.next {
+    right: 10px;
+}
+
+.previous:hover, .next:hover {
+    background: linear-gradient(135deg, #ce93d8 0%, #f48fb1 100%);
+}
+
+/* Stopka */
+footer {
+    background-color: #f48fb1;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    font-weight: bold;
+}
+
+/* Strona logowania */
+.loginpage form {
+    background-color: #fce4ec;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 0 10px rgba(244, 143, 177, 0.4);
+}
+
+.loginpage .zaloguj {
+    width: 100%;
+    margin-top: 20px;
+    font-weight: bold;
+    background-color: #ec407a;
+    border: none;
+    color: white;
+    border-radius: 8px;
+    padding: 10px;
+}
+
+.loginpage .zaloguj:hover {
+    background-color: #d81b60;
+}
+
+.loginpage h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #6a1b9a;
+}
+
+/* Komentarze */
+.comment, .comment-section {
+    width: 200px;
+    background-color: #f8bbd0;
+    color: #4a148c;
+    padding: 20px;
+    border-radius: 12px;
+    margin: 10px;
+    box-shadow: 0 0 10px rgba(244, 143, 177, 0.5);
+}
+
+.commentinvidual {
+    padding: 10px 0;
+}
+
+.comment p {
+    word-wrap: break-word;
+}
+
+/* Hasło / formularz */
+.passw {
+    background-color: #fce4ec;
+    color: #6a1b9a;
+    width: 300px;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 0 10px rgba(244, 143, 177, 0.5);
+}
+
+.passw button {
+    width: 100%;
+    background-color: #ec407a;
+    border: none;
+    color: white;
+    padding: 10px;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.passw button:hover {
+    background-color: #d81b60;
+}
+
+/* Dodawanie posta */
+.postpage {
+    background-color: #fce4ec;
+    color: #4a148c;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 0 10px rgba(244, 143, 177, 0.5);
+}
+
+.postpage .dodpost {
+    width: 100%;
+    background-color: #f8bbd0;
+    color: #880e4f;
+    font-weight: bold;
+    border: 2px solid #ec407a;
+    border-radius: 8px;
+    padding: 10px;
+}
+
+.postpage .dodpost:hover {
+    background-color: #ec407a;
+    color: white;
+}
+
+/* Scrollbar dla estetyki */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #fce4ec;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #ec407a;
+    border-radius: 10px;
+}
+}
