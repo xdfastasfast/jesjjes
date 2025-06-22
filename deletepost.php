@@ -9,10 +9,10 @@ $postIdToDelete = $_POST['post_id'];
 
 try {
     $db = getDatabaseConnection();
-    $query = 'DELETE FROM posts WHERE id = :id AND author = :username';
+    $query = 'DELETE FROM posts WHERE id = :id AND user_id = :uid';
     $stmt = $db->prepare($query);
     $stmt->bindParam(':id', $postIdToDelete);
-    $stmt->bindParam(':username', $_COOKIE['username']);
+    $stmt->bindParam(':uid', $_COOKIE['user_id']);
     $stmt->execute();
 
     if ($stmt->rowCount() <= 0) {
