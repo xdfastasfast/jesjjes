@@ -19,7 +19,9 @@
     try {
 
         $db = getDatabaseConnection();
-        $query = "SELECT * FROM posts ORDER BY date DESC";
+        $query = "SELECT p.id, p.title, p.content, p.created_at AS date, u.username AS author
+                  FROM posts p JOIN users u ON p.user_id = u.id
+                  ORDER BY p.created_at DESC";
         $stmt = $db->prepare($query);
         $stmt->execute();
         $posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
