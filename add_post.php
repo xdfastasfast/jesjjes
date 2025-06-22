@@ -11,7 +11,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt = $db->prepare("INSERT INTO posts (author, title, content) VALUES (?, ?, ?)");
         $stmt->execute([$author, $title, $content]);
  
-        echo "Post dodany!";
         header("Location: glowna.php");
         exit;
     } catch (PDOException $e) {

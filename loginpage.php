@@ -22,8 +22,7 @@
 <main>
 <?php
     include 'login.php';
-    include 'database.php';
-require_once('database.php');
+    require_once 'database.php';
  
     session_start();
  
