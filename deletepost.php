@@ -15,10 +15,8 @@ try {
     $stmt->bindParam(':username', $_COOKIE['username']);
     $stmt->execute();
 
-    if ($stmt->rowCount() > 0) {
-        echo 'Post was successfully deleted';
-    } else {
-        echo 'Could not delete post. Either the post does not exist, or you are not the author of the post';
+    if ($stmt->rowCount() <= 0) {
+        // Optional: handle case when deletion did not occur
     }
 } catch (PDOException $e) {
     echo 'Database error: ' . $e->getMessage();
