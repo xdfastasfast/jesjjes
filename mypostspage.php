@@ -54,7 +54,7 @@ foreach ($posts as $index => $post) {
     }
 }
 
-if ($displayedPost === null) {
+if ($displayedPost === null && !empty($posts)) {
     $displayedPost = $posts[0];
     $displayedPostIndex = 0;
 }
@@ -180,17 +180,19 @@ if (isset($_POST['delete_post_id'])) {
         </div>
     </div>
     <div class="main-section">
+        <?php if ($displayedPost !== null) : ?>
         <nav class="postpage">
             <form action="mypostspage.php" method="post">
                 <h1>EDIT POST</h1>
                 <label for="title">Title:</label><br>
-                <input type="text" id="title" name="title" value="<?php echo $displayedPost['title']; ?>"><br>
+                <input type="text" id="title" name="title" value="<?php echo htmlspecialchars($displayedPost['title'], ENT_QUOTES); ?>"><br>
                 <label for="content">Content:</label><br>
-                <textarea id="content" name="content"><?php echo $displayedPost['content']; ?></textarea><br>
+                <textarea id="content" name="content"><?php echo htmlspecialchars($displayedPost['content'], ENT_QUOTES); ?></textarea><br>
                 <input type="hidden" name="update_post_id" value="<?php echo $displayedPost['id']; ?>">
                 <input type="submit" value="Update">
             </form>
         </nav>
+        <?php endif; ?>
     </div>
     <div class="main-section">
         <?php
