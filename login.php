@@ -7,7 +7,8 @@ function logOut(){
     if (isset($_GET['logout'])) {
         setcookie('user_logged_in', '', time() - 3600, "/");
         setcookie('username', 'guest', time() + 3600, "/");
-        header('Location: glowna.php'); 
+        setcookie('user_id', '', time() - 3600, "/");
+        header('Location: glowna.php');
     }
 }
 
