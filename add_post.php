@@ -4,12 +4,12 @@ include 'database.php';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $title = $_POST['title'];
     $content = $_POST['content'];
-    $author = $_COOKIE['username']; // zakładamy, że masz ciasteczko
+    $userId = $_COOKIE['user_id'];
  
     try {
         $db = getDatabaseConnection();
-        $stmt = $db->prepare("INSERT INTO posts (author, title, content) VALUES (?, ?, ?)");
-        $stmt->execute([$author, $title, $content]);
+        $stmt = $db->prepare("INSERT INTO posts (user_id, title, content, created_at) VALUES (?, ?, ?, NOW())");
+        $stmt->execute([$userId, $title, $content]);
  
         header("Location: glowna.php");
         exit;
