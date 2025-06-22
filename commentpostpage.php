@@ -17,20 +17,16 @@ try {
  
     if (isset($_GET['id'])) {
         $postId = $_GET['id'];
-        $query = "SELECT * FROM posts WHERE id = ?";
+        $query = "SELECT p.id, p.title, p.content, p.created_at, u.username AS author
+                  FROM posts p JOIN users u ON p.user_id = u.id WHERE p.id = ?";
         $stmt = $db->prepare($query);
         $stmt->execute([$postId]);
         $post = $stmt->fetch(PDO::FETCH_ASSOC);
- 
+
         if (!$post) {
             die('Post not found.');
         }
- 
-        // Pobierz nazwę autora posta
-        $authorQuery = "SELECT username FROM users WHERE id = ?";
-        $authorStmt = $db->prepare($authorQuery);
-        $authorStmt->execute([$post['user_id']]);
-        $author = $authorStmt->fetchColumn();
+        $author = $post['author'];
  
     } else {
         header('Location: glowna.php');

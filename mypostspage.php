@@ -36,9 +36,11 @@ logOut();
 <?php
 $db = getDatabaseConnection();
 
-$query = 'SELECT * FROM posts WHERE author = :username ORDER BY date DESC';
+$query = 'SELECT p.id, p.title, p.content, p.created_at AS date, u.username AS author
+          FROM posts p JOIN users u ON p.user_id = u.id
+          WHERE p.user_id = :uid ORDER BY p.created_at DESC';
 $stmt = $db->prepare($query);
-$stmt->bindParam(':username', $_COOKIE['username']);
+$stmt->bindParam(':uid', $_COOKIE['user_id']);
 $stmt->execute();
 
 $posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -65,10 +67,10 @@ if (isset($_POST['delete_post_id'])) {
     $postIdToDelete = $_POST['delete_post_id'];
 
     try {
-        $query = 'DELETE FROM posts WHERE id = :id AND author = :username';
+        $query = 'DELETE FROM posts WHERE id = :id AND user_id = :uid';
         $stmt = $db->prepare($query);
         $stmt->bindParam(':id', $postIdToDelete);
-        $stmt->bindParam(':username', $_COOKIE['username']);
+        $stmt->bindParam(':uid', $_COOKIE['user_id']);
         $stmt->execute();
 
         if ($stmt->rowCount() > 0) {
@@ -84,19 +86,19 @@ if (isset($_POST['delete_post_id'])) {
     $content = isset($_POST['content']) ? $_POST['content'] : null;
 
     try {
-        $author = isset($_COOKIE['username']) ? $_COOKIE['username'] : null;
+        $userId = isset($_COOKIE['user_id']) ? $_COOKIE['user_id'] : null;
 
-        if (!$author) {
-            throw new Exception('Author not found in cookies');
+        if (!$userId) {
+            throw new Exception('User not found in cookies');
         }
 
         $date = date("Y-m-d H:i:s");
 
         $pdo = getDatabaseConnection();
 
-        $stmt = $pdo->prepare("INSERT INTO posts (title, author, content, date) VALUES (?, ?, ?, ?)");
+        $stmt = $pdo->prepare("INSERT INTO posts (user_id, title, content, created_at) VALUES (?, ?, ?, ?)");
 
-        $stmt->execute([$title, $author, $content, $date]);
+        $stmt->execute([$userId, $title, $content, $date]);
 
         echo "Post successfully added.";
         header("Location: " . $_SERVER['PHP_SELF'], true, 303);
@@ -110,21 +112,21 @@ if (isset($_POST['delete_post_id'])) {
     $content = isset($_POST['content']) ? $_POST['content'] : null;
 
     try {
-        $author = isset($_COOKIE['username']) ? $_COOKIE['username'] : null;
+        $userId = isset($_COOKIE['user_id']) ? $_COOKIE['user_id'] : null;
 
-        if (!$author) {
-            throw new Exception('Author not found in cookies');
+        if (!$userId) {
+            throw new Exception('User not found in cookies');
         }
 
         $date = date("Y-m-d H:i:s");
 
-        $stmt = $db->prepare("UPDATE posts SET title = :title, content = :content, date = :date WHERE id = :id AND author = :author");
+        $stmt = $db->prepare("UPDATE posts SET title = :title, content = :content, created_at = :date WHERE id = :id AND user_id = :uid");
 
         $stmt->bindParam(':title', $title);
         $stmt->bindParam(':content', $content);
         $stmt->bindParam(':date', $date);
         $stmt->bindParam(':id', $postIdToUpdate);
-        $stmt->bindParam(':author', $author);
+        $stmt->bindParam(':uid', $userId);
         $stmt->execute();
 
         if ($stmt->rowCount() > 0) {
